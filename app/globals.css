@@ -11,3 +11,29 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     appearance: textfield;
 }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0f4f8;
+    color: #334155;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+.container {
+    max-width: 1200px;
+    width: 100%;
+}
+.card {
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.card:hover {
+    transform: translateY(-8px) rotate(1deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}

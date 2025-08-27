@@ -24,52 +24,58 @@ export default function Home() {
             ตัวช่วยคำนวณสำหรับชีวิตประจำวันของคุณ คำนวณ BMI, BMR, และค่างวดรถได้อย่างรวดเร็ว
           </p>
         </header>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Link href="/bmi"
-            className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* <!-- BMI Card --> */}
+          <Link
+            href="/bmi"
+            className="card p-6 flex flex-col items-center text-center"
           >
-            <Image
-              src={bmi}
-              alt="BMI Calculator"
-              className="w-full object-cover rounded-t-2xl transition-transform duration-300 group-hover:scale-110"
-            />
-            <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">คำนวณ BMI</h2>
-              <p className="text-gray-500">
-                คำนวณดัชนีมวลกายเพื่อประเมินความเสี่ยงด้านสุขภาพที่อาจเกิดขึ้น
-              </p>
+            <div className="flex-shrink-0 mb-4">
+              <Image src={bmi} alt="BMI" width={96} height={96} />
             </div>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-2">
+              คำนวณค่า BMI
+            </h2>
+            <p className="text-gray-500">
+              คำนวณดัชนีมวลกาย เพื่อประเมินภาวะอ้วนหรือผอม
+            </p>
           </Link>
-          <Link href="/bmr"
-            className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+
+          {/* <!-- BMR Card --> */}
+          <Link
+            href="/bmr"
+            className="card p-6 flex flex-col items-center text-center"
           >
-            <Image
-              src={mbr}
-              alt="BMI Calculator"
-              className="w-full object-cover rounded-t-2xl transition-transform duration-300 group-hover:scale-110"
-            />
-            <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">คำนวณ BMR</h2>
-              <p className="text-gray-500">
-                คำนวณอัตราการเผาผลาญพลังงานพื้นฐานของร่างกาย
-              </p>
+            <div className="flex-shrink-0 mb-4">
+              <Image src={mbr} alt="BMR" width={96} height={96} />
             </div>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-2">
+              คำนวณค่า BMR
+            </h2>
+            <p className="text-gray-500">
+              คำนวณอัตราการเผาผลาญพลังงานในร่างกาย
+            </p>
           </Link>
+
+          {/* <!-- Car Installment Card --> */}
           <Link
             href="/carinstallment"
-            className="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 overflow-hidden"
+            className="card p-6 flex flex-col items-center text-center"
           >
-            <Image
-              src={car}
-              alt="BMI Calculator"
-              className="w-full object-cover rounded-t-2xl transition-transform duration-300 group-hover:scale-110"
-            />
-            <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">คำนวณค่างวดรถ</h2>
-              <p className="text-gray-500">
-                คำนวณค่างวดรถยนต์และวางแผนการเงินสำหรับการซื้อรถของคุณ
-              </p>
+            <div className="flex-shrink-0 mb-4">
+              <Image
+                src={car}
+                alt="Car Installment"
+                width={96}
+                height={96}
+              />
             </div>
+            <h2 className="text-2xl font-semibold text-gray-700 mb-2">
+              คำนวณค่างวดรถ
+            </h2>
+            <p className="text-gray-500">
+              คำนวณค่างวดรถยนต์รายเดือนอย่างรวดเร็ว
+            </p>
           </Link>
         </div>
       </div>

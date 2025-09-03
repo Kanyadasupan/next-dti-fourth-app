@@ -2,34 +2,33 @@
 import Image from "next/image";
 import mbr from "../images/mbr.png";
 import { useState } from "react";
+import Link from "next/link";
 export default function Page() {
 
-  const [gender, setGender] = useState<string>('');
-  const [age, setAge] = useState<string>('');
-  const [height, setHeight] = useState<string>('');
-  const [weight, setWeight] = useState<string>('');
-  const [bmr, setBmr] = useState<number | null>(null);
+  const [gender, setGender] = useState('male');
+  const [age, setAge] = useState('');
+  const [height, setHeight] = useState('');
+  const [weight, setWeight] = useState('');
+  const [bmr, setBmr] = useState('0.00');
 
   const calculateBmr = () => {
-    const ageValue = parseFloat(age);
+    const ageValue = parseInt(age);
     const heightValue = parseFloat(height);
     const weightValue = parseFloat(weight);
 
-    if (!gender || isNaN(ageValue) || isNaN(heightValue) || isNaN(weightValue) ||
-        ageValue <= 0 || heightValue <= 0 || weightValue <= 0) {
-      setBmr(null);
+    //validate input
+    if (!age || !height || !weight || parseInt(age) <= 0 || parseFloat(height) <= 0 || parseFloat(weight) <= 0) {
+      alert ("กรุณาป้อนค่าอายุ ส่วนสูง น้ำหนักที่ถูกต้อง โดยต้องมีค่ามากกว่า 0");
       return;
     }
 
-    let calculatedBmr: number;
-
+    let bmrValue = 0.00;
     if (gender === 'male') {
-      calculatedBmr = (10 * weightValue) + (6.25 * heightValue) - (5 * ageValue) + 5;
-    } else { 
-      calculatedBmr = (10 * weightValue) + (6.25 * heightValue) - (5 * ageValue) - 161;
+      bmrValue = 66.5 + (13.75 * weightValue) + (5.003 * heightValue) - (6.75 * ageValue);
+    } else if (gender === 'female') {
+      bmrValue = 655.1 + (9.563 * weightValue) + (1.850 * heightValue) - (4.76 * ageValue);
     }
-
-    setBmr(calculatedBmr);
+    setBmr(bmrValue.toFixed(2));
   };
 
   const resetForm = () => {
@@ -37,7 +36,7 @@ export default function Page() {
     setAge('');
     setHeight('');
     setWeight('');
-    setBmr(null);
+    setBmr('0.00');
   };
 
 
@@ -74,6 +73,7 @@ export default function Page() {
               onChange={(e) => setAge(e.target.value)}
               className="mb-4 mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pink-500 focus:border-pink-500 transition-all duration-200"
               placeholder="เช่น 25"
+              
             />
           </div>
 
@@ -112,6 +112,8 @@ export default function Page() {
       id="male"
       name="gender"
       value="male"
+      checked={gender === 'male'}
+      onChange={(e) => setGender(e.target.value)}
       className="mr-2"
     />
     <label htmlFor="male" className="text-base font-medium text-gray-700">ชาย</label>
@@ -122,6 +124,8 @@ export default function Page() {
       id="female"
       name="gender"
       value="female"
+      checked={gender === 'female'}
+      onChange={(e) => setGender(e.target.value)}
       className="mr-2"
     />
     <label htmlFor="female" className="text-base font-medium text-gray-700">หญิง</label>
@@ -129,12 +133,14 @@ export default function Page() {
         </div>
 
         <div className="mt-6 flex space-x-4">
-          <button
+          <button 
+            onClick={calculateBmr}
             className="flex-1 w-full py-3 px-4 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
           >
             คำนวณ BMR
           </button>
-          <button
+          <button 
+            onClick={resetForm}
             className="flex-1 w-full py-3 px-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
           >
             รีเซ็ต
@@ -143,8 +149,13 @@ export default function Page() {
 
         <div className="mt-6 text-center text-xl font-semibold text-gray-700">
           <p>
-            ค่า BMR ที่คำนวณได้: 0.00 กิโลแคลอรี่
+            ค่า BMR ที่คำนวณได้: {bmr} กิโลแคลอรี่
           </p>
+        </div>
+        <div className="mt-6 flex space-x-4">
+          <Link href="/" className="W=full py-3 px-4 border border-pink-600 hover:bg-gray-400 text-pink-600 font-bold rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-600">
+            ย้อนกลับ
+          </Link>
         </div>
       </div>
     </div>

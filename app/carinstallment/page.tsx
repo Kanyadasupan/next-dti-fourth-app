@@ -2,15 +2,17 @@
 import Image from "next/image";
 import car from "../images/car.png";
 import { useState } from "react";
+import Link from "next/link";
+
 
 export default function Page() {
 
-  const [name, setName] = useState<string>('');
-  const [carPrice, setCarPrice] = useState<string>('');
-  const [interestRate, setInterestRate] = useState<string>('');
-  const [downPayment, setDownPayment] = useState<string>('15');
-  const [loanPeriod, setLoanPeriod] = useState<string>('');
-  const [monthlyPayment, setMonthlyPayment] = useState<number | null>(null);
+  const [name, setName] = useState('');
+  const [carPrice, setCarPrice] = useState('');
+  const [interestRate, setInterestRate] = useState('');
+  const [downPayment, setDownPayment] = useState('15');
+  const [loanPeriod, setLoanPeriod] = useState('');
+  const [monthlyPayment, setMonthlyPayment] = useState('0.00');
 
   const calculateInstallment = () => {
     const price = parseFloat(carPrice);
@@ -18,20 +20,21 @@ export default function Page() {
     const annualRate = parseFloat(interestRate);
     const periodMonths = parseInt(loanPeriod, 10);
 
-    if (isNaN(price) || isNaN(downPercent) || isNaN(annualRate) || isNaN(periodMonths) ||
-        price <= 0 || annualRate < 0 || periodMonths <= 0) {
-      setMonthlyPayment(null);
+    //validate input
+    if (!carPrice || !interestRate || !loanPeriod || parseFloat(carPrice) <= 0 || parseFloat(interestRate) <= 0 || parseInt(loanPeriod, 10) <= 0) {
+      alert ("กรุณาป้อนค่าราคา ดอกเบี้ย ระยะเวลาที่ต้องการ โดยต้องมีค่ามากกว่า 0");
       return;
     }
 
-    const principal = price * (1 - downPercent / 100);
+    const downPaymentAmount = price * (downPercent / 100);
+    const loanAmount = price - downPaymentAmount;
 
-    const monthlyRate = annualRate / 100 / 12;
+    const totalInterestPayment = (loanAmount * (annualRate / 100)) * (periodMonths / 12);
+    const totalLoanPayment = loanAmount + totalInterestPayment;
+    
+    const monthlyPaymentAmount = (totalLoanPayment / periodMonths) + (downPaymentAmount * 0.001);
 
-    const calculatedPayment = principal * (monthlyRate * Math.pow(1 + monthlyRate, periodMonths)) /
-                             (Math.pow(1 + monthlyRate, periodMonths) - 1);
-
-    setMonthlyPayment(calculatedPayment);
+    setMonthlyPayment(monthlyPaymentAmount.toFixed(2));
   };
 
   const resetForm = () => {
@@ -40,7 +43,7 @@ export default function Page() {
     setInterestRate('');
     setDownPayment('15');
     setLoanPeriod('');
-    setMonthlyPayment(null);
+    setMonthlyPayment('0.00');
   };
 
   return (
@@ -119,7 +122,7 @@ export default function Page() {
                     id={`downPayment-${percent}`}
                     name="downPayment"
                     value={percent}
-                    checked={downPayment === String(percent)}
+                    checked={downPayment == String(percent)}
                     onChange={(e) => setDownPayment(e.target.value)}
                     className="h-4 w-4 text-teal-600 border-gray-300 focus:ring-teal-500"
                   />
@@ -168,8 +171,13 @@ export default function Page() {
 
         <div className="mt-6 text-center text-xl font-semibold text-gray-700">
           <p>
-            ค่างวดต่อเดือน: {monthlyPayment !== null ? monthlyPayment.toFixed(2) : '0.00'} บาท
+            ค่างวดต่อเดือน: {monthlyPayment} บาท
           </p>
+        </div>
+        <div className="mt-6 flex space-x-4">
+          <Link href="/" className="W=full py-3 px-4 border border-teal-700 hover:bg-gray-400 text-teal-700 font-bold rounded-lg shadow-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-700">
+            ย้อนกลับ
+          </Link>
         </div>
       </div>
     </div>

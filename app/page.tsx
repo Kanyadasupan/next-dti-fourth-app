@@ -18,7 +18,7 @@ export default function Home() {
         </div>
         <header className="text-center mb-12">
           <h1 className="text-5xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
-            เครื่องมือ<span className="text-indigo-600">คำนวณ</span>ออนไลน์
+            เครื่องมือ<span className="text-amber-400">คำนวณ</span>ออนไลน์
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             ตัวช่วยคำนวณสำหรับชีวิตประจำวันของคุณ คำนวณ BMI, BMR, และค่างวดรถได้อย่างรวดเร็ว

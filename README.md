@@ -57,7 +57,7 @@
 ---
 
 ## 👤 ผู้พัฒนา (Developer)
-**Developed by [ใส่ชื่อหรือ GitHub Profile ของคุณ]**
-*Student at [ชื่อมหาวิทยาลัย/คณะของคุณ]*
+**Developed by [Kanyada](https://github.com/KanyadaSupan)**
+*Student at Southeast Asia University | Digital Technology and Innovation*
 
 ---

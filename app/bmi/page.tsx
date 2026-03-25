@@ -3,7 +3,7 @@ import Image from "next/image";
 import bmi from "../images/bmi.png";
 import Link from "next/link";
 import { useState } from "react";
-import { parse } from "path";
+
 
 export default function Page() {
 

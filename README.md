@@ -38,7 +38,7 @@
 
 1.  **Clone โปรเจกต์:**
     ```bash
-    git clone [https://github.com/ช](https://github.com/ช)ื่อผู้ใช้ของคุณ/ชื่อโปรเจกต์.git
+    git clone https://github.com/Kanyadasupan/next-dti-fourth-app.git
     cd ชื่อโปรเจกต์
     ```
     *(ตรวจสอบและเปลี่ยน URL ของ Repository ให้ตรงกับชื่อ Repository ของคุณ)*
